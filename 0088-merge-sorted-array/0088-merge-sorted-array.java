@@ -14,12 +14,12 @@ class Solution {
                 i--;
             }
             else{
-                nums1[k] = nums1[j];
+                nums1[k] = nums2[j];
                 j--; 
             }
 
             k--;
         }
-        
+
     }
 }
