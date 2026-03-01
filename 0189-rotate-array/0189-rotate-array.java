@@ -6,7 +6,7 @@ class Solution {
         int[] temp = new int[n];
         
         for (int i = 0; i < n; i++) {
-            temp[(i + k) % n] = nums[i];
+            temp[( k + i) % n] = nums[i];
         }
         
         for (int i = 0; i < n; i++) {
