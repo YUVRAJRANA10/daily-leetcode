@@ -1,15 +1,16 @@
 class Solution {
     public int addDigits(int num) {
-        while (num >= 10) {          // run until single digit
-            int sum = 0;
 
-            while (num > 0) {
-                sum += num % 10;     // take last digit
-                num /= 10;           // remove last digit
-            }
-
-            num = sum;               // repeat with new sum
+        if(num < 10){
+            return num;
         }
-        return num;
+        int sum  = 0;
+        while(num > 0){
+        int rem  = num % 10;
+        sum += rem;
+        num = num /10;
+        }
+
+        return addDigits(sum);
     }
 }
