@@ -1,32 +1,31 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        if(s.length() != t.length()){
+        if (s.length() != t.length()) {
             return false;
         }
-        HashMap<Character,Character> map = new HashMap<>();
-        int i = 0; 
-         for(char c: s.toCharArray()){
-                 if(!map.containsValue(t.charAt(i))){
-                 map.put(c,t.charAt(i) );
-                 
-                 }
-                 i++;
 
-         }
+        HashMap<Character, Character> map = new HashMap<>();
+        HashMap<Character, Character> reverseMap = new HashMap<>();
 
-         StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
 
-         for(char c: s.toCharArray()){
-               sb.append(map.get(c));
-         }
+            // check s → t
+            if (map.containsKey(c1)) {
+                if (map.get(c1) != c2) return false;
+            } else {
+                map.put(c1, c2);
+            }
 
+            // check t → s
+            if (reverseMap.containsKey(c2)) {
+                if (reverseMap.get(c2) != c1) return false;
+            } else {
+                reverseMap.put(c2, c1);
+            }
+        }
 
-         if(sb.toString().equals(t)){
-            return true;
-         }
-
-
-         return false;
-        
+        return true;
     }
 }
