@@ -1,24 +1,29 @@
+import java.util.*;
+
 class Solution {
     public boolean isAnagram(String s, String t) {
         
+        if (s.length() != t.length()) return false;
 
-char[] chars = s.toCharArray();
-char[] chars2 = t.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
 
-Arrays.sort(chars);
-Arrays.sort(chars2);
+        // Step 1: Count chars in s
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
 
-String sorteds = new String(chars); 
-String sortedt = new String(chars2);
+        // Step 2: Reduce using t
+        for (char c : t.toCharArray()) {
+            if (!map.containsKey(c)) return false;
 
+            map.put(c, map.get(c) - 1);
 
-if(sorteds.equals(sortedt)){
-    return true;
-}
+            if (map.get(c) == 0) {
+                map.remove(c);
+            }
+        }
 
-return false;
-// Results in "abcde"
-
-
+        // Step 3: Check empty
+        return map.isEmpty();
     }
 }
