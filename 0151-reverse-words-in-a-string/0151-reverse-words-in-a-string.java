@@ -7,7 +7,7 @@ class Solution {
         String[] arr = s.split("\\s+");
 
         for (int i = arr.length - 1; i >= 0; i--) {
-
+   
             curr += arr[i];
             if(i == 0){
                 continue;
@@ -16,6 +16,6 @@ class Solution {
 
         }
 
-        return curr.toString().trim();
+        return curr.trim();
     }
 }
