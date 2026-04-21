@@ -39,18 +39,16 @@ class Solution {
         int finalcount = count - n;
         ListNode temp2 = head;
         int i = 1;
-           
-           if(finalcount == 0){
+
+        if (finalcount == 0) {
             head = head.next;
             return head;
-           }
-
+        }
 
         while (i != finalcount) {
             temp2 = temp2.next;
             i++;
         }
-
 
         temp2.next = temp2.next.next;
         return head;
