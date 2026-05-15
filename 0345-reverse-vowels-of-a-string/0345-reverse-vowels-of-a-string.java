@@ -1,37 +1,41 @@
 class Solution {
+
     public String reverseVowels(String s) {
 
-        Stack<Character> st = new Stack<>();
+        char[] arr = s.toCharArray();
 
-        for (char c : s.toCharArray()) {
+        int left = 0;
+        int right = arr.length - 1;
 
-            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O'
-                    || c == 'U') {
+        while (left < right) {
 
-                st.push(c);
+            // move left until vowel
+            while (left < right && !isVowel(arr[left])) {
+                left++;
             }
 
-        }
-
-        char[] chars = s.toCharArray();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < chars.length; i++) {
-
-            char c = chars[i];
-
-            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O'
-                    || c == 'U') {
-
-                        sb.append(st.pop());
-
-            } else {
-                sb.append(c);
+            // move right until vowel
+            while (left < right && !isVowel(arr[right])) {
+                right--;
             }
 
+            // swap vowels
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+
+            left++;
+            right--;
         }
 
-        return sb.toString();
+        return new String(arr);
+    }
 
+    public boolean isVowel(char c) {
+
+        return c == 'a' || c == 'e' || c == 'i' ||
+               c == 'o' || c == 'u' ||
+               c == 'A' || c == 'E' || c == 'I' ||
+               c == 'O' || c == 'U';
     }
 }
