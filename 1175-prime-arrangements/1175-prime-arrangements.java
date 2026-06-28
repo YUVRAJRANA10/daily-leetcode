@@ -34,7 +34,7 @@ public long permutation(int n, long MOD) {
                     prime_count++;
                  }
         }          
-        long mod = 1_000_000_007;
+        long mod = 1000000007;
 
 long res =  (permutation(prime_count,mod) * permutation(n-prime_count,mod)) % mod;
 
