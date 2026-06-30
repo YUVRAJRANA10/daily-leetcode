@@ -1,17 +1,24 @@
 class Solution {
+
+
+
+    int gcd( int a, int b){
+
+        while(b != 0){
+
+            int rem = a % b;
+            a = b;
+            b = rem;
+        }
+
+        return a;
+}
     public int commonFactors(int a, int b) {
-        int min = 0;
-         if(a <= b){
-
-     min =a;
-         }
-         else{
-            min = b;
-         }
+int gcd = gcd(a,b);
 int cnt = 0;
-         for(int i = 1; i <= min; i++){
+         for(int i = 1; i <= gcd; i++){
 
-            if(a%i == 0 && b%i == 0){
+            if(gcd % i == 0){
                 cnt++;
             }
          }
