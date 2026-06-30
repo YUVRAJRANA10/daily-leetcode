@@ -17,7 +17,7 @@ class Solution {
         
   int gcd = nums[0];
 for(int i = 1; i < nums.length; i++){
-
+if(gcd == 1)return true;
 
     gcd = gcd(gcd , nums[i]);
 }
