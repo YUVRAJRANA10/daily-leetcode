@@ -41,7 +41,7 @@ while( j <=arr.length - 1){
 
 if(arr[j] != arr[i]){
     
-        arr[i+1] = arr[j];
+ arr[i+1] = arr[j];
     
   i++;
 }
