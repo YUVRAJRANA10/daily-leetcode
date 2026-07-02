@@ -1,6 +1,6 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-
+    
         // Hash array -> stores last seen index of characters
         int[] hash = new int[256];
 
