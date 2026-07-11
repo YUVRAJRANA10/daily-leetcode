@@ -1,39 +1,41 @@
 class Solution {
-
-public String longestPalindrome(String s) {
-    if (s == null || s.length() == 0) return "";
-    
-    int max = 0;
-    String finalstring = "";
-    
-    for (int i = 0; i < s.length(); i++) {
-        StringBuilder n = new StringBuilder();
-        for (int j = i; j < s.length(); j++) {
-            n.append(s.charAt(j));
+    public String longestPalindrome(String s) {
+        
+         if (s == null || s.length() < 1) return "";
+        
+        int start = 0;
+        int end = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            // Case 1: Odd length palindrome (centered at i)
+            int len1 = expandAroundCenter(s, i, i);
             
-            // Check if the current substring 'n' is a palindrome
-            if (isPalindrome(n.toString())) {
-                // Compare the length of the SUBSTRING 'n', not 's'
-                if (n.length() > max) {
-                    max = n.length();
-                    finalstring = n.toString();
-                }
+            // Case 2: Even length palindrome (centered between i and i+1)
+            int len2 = expandAroundCenter(s, i, i + 1);
+            
+            // Get the maximum length found from this center
+            int maxLen = Math.max(len1, len2);
+            
+            // Update the boundaries of the longest palindromic substring
+            if (maxLen > (end - start)) {
+                start = i - (maxLen - 1) / 2;
+                end = i + maxLen / 2;
             }
         }
+        
+        // substring in Java takes (startIndex, e
+        return s.substring(start,end+1);
     }
-    return finalstring;
-}
 
-public boolean isPalindrome(String a) {
-    int l = 0; 
-    int r = a.length() - 1; 
-    while (l < r) {
-        if (a.charAt(l) != a.charAt(r)) {
-            return false; 
-        } 
-        l++; 
-        r--; 
-    } 
-    return true; 
-}
+
+    public int expandAroundCenter(String s , int left, int right){
+
+
+        while(left>=0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+            left--;
+            right++;
+        }
+
+        return right - left -1;
+    }
 }
