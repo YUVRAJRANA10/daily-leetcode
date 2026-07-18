@@ -1,0 +1,22 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+         int hash[]= new int[nums.length+1];
+         Arrays.fill(hash,0);
+        for(int i : nums){
+           hash[i]++;
+        }
+        
+         for(int i = 0; i <  hash.length; i++){
+         
+          if(hash[i] > 1){
+            return i;
+          }
+        
+          
+
+         }
+
+         return -1;
+
+    }
+}
