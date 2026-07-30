@@ -22,7 +22,7 @@ class Solution {
         int col = matrix[0].length;
 
         for(int i = 0; i < row; i++){
-            if(target >= matrix[i][0] && target <= matrix[i][matrix[i].length -1]){
+            if(target >= matrix[i][0] && target <= matrix[i][col-1]){
             if(bs(matrix[i],target))return true;}
         }
         return false;
