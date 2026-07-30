@@ -22,8 +22,8 @@ class Solution {
         int col = matrix[0].length;
 
         for(int i = 0; i < row; i++){
-
-            if(bs(matrix[i],target))return true;
+            if(target >= matrix[i][0] && target <= matrix[i][col-1]){
+            if(bs(matrix[i],target))return true;}
         }
         return false;
         
