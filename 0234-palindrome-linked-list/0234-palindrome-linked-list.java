@@ -2,7 +2,7 @@ class Solution {
     public boolean isPalindrome(ListNode head) {
 
         if (head == null || head.next == null) return true;
-
+        
         // Step 1: Find middle
         ListNode slow = head;
         ListNode fast = head;
@@ -11,6 +11,7 @@ class Solution {
             slow = slow.next;
             fast = fast.next.next;
         }
+      
 
         // Step 2: Reverse second half
         ListNode prev = null;
