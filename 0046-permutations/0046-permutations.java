@@ -1,32 +1,28 @@
 class Solution {
 
-    private void backtrack(List<List<Integer>> resultList, ArrayList<Integer> tempList, int[] nums) {
+    private void backtrack(List<List<Integer>> resultList, ArrayList<Integer> tempList, int[] nums,boolean[] visited) {
         if (tempList.size() == nums.length) {
-
-            resultList.add(new ArrayList<>(tempList));
+            resultList.add(new ArrayList<>(tempList)); 
             return;
         }
+        
 
-        for (int num : nums) {
-             if(tempList.contains(num)){
-                continue;
-             }
+    for (int i = 0; i < nums.length; i++){
 
-         tempList.add(num);
-
-         backtrack(resultList,tempList,nums);
-
-         tempList.remove(tempList.size() - 1);
-
-        }
-
+        if(visited[i])continue;
+        visited[i] = true;
+        tempList.add(nums[i]);
+        backtrack(resultList,tempList,nums,visited);
+        visited[i] = false;
+        tempList.remove(tempList.size()-1);
     }
-
+    }
 
     public List<List<Integer>> permute(int[] nums) {
 
         List<List<Integer>> resultList = new ArrayList<>();
-        backtrack(resultList, new ArrayList<>(), nums);
-      return resultList;
+        boolean[] visited = new boolean[nums.length];
+        backtrack(resultList, new ArrayList<>(), nums,visited);
+        return resultList;
     }
 }
