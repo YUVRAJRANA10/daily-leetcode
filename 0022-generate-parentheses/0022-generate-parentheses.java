@@ -1,19 +1,19 @@
 class Solution {
 
     public void solve(
-        StringBuilder path,
-        int open,
-        int close,
-        int n,
-        List<String> ans
-    ) {
+            StringBuilder path,
+            int open,
+            int close,
+            int n,
+            List<String> ans) {
 
         // Complete valid string
+     
         if (path.length() == 2 * n) {
             ans.add(path.toString());
             return;
         }
-
+       
         // Add '('
         if (open < n) {
 
@@ -35,18 +35,16 @@ class Solution {
         }
     }
 
-
     public List<String> generateParenthesis(int n) {
 
         List<String> ans = new ArrayList<>();
 
         solve(
-            new StringBuilder(),
-            0,
-            0,
-            n,
-            ans
-        );
+                new StringBuilder(),
+                0,
+                0,
+                n,
+                ans);
 
         return ans;
     }
