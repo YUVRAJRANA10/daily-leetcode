@@ -17,6 +17,7 @@ class Solution {
 
             }
             st.push(i);
+            
 
         }
 
