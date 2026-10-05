@@ -1,32 +1,34 @@
 class Solution {
+    public void sum(int index,int sum, int target,int[] candidates,List<Integer> path, List<List<Integer>>ans){
 
-        public void solve(int start, int target,int candidates[], List<Integer> path, List<List<Integer>> ans) {
-           
-        if (target == 0 ) {
-            ans.add(new ArrayList<>(path));
-        }
-
-        for (int i = start; i < candidates.length; i++) {
-            
-            if(i > start && candidates[i] == candidates[i-1] ){
+            if (sum == target) {
+                ans.add(new ArrayList<>(path));
+                return;
+            }
+       
+      for (int i = index; i < candidates.length; i++) {
+          
+            if (i > index && candidates[i] == candidates[i - 1]) {
                 continue;
             }
-            if (candidates[i] > target) {
+            if (sum + candidates[i] > target) {
                 break;
             }
+       
             path.add(candidates[i]);
-             
-            solve(i+1,target - candidates[i] ,candidates, path ,ans);
-            
-            path.remove(path.size() - 1);
 
+            sum(i + 1, sum + candidates[i], target, candidates, path, ans);
+
+            path.remove(path.size() - 1);
         }
+        
 
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-                Arrays.sort(candidates);
         List<List<Integer>> ans = new ArrayList<>();
-        solve(0,target,candidates, new ArrayList<>(), ans);
+        List<Integer> path = new ArrayList<>();
+        Arrays.sort(candidates);
+        sum(0,0,target,candidates,path,ans);
         return ans;
     }
 }
