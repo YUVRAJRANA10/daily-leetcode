@@ -1,29 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    public void solve(int start, int target,int candidates[], List<Integer> path, List<List<Integer>> ans) {
-             
-        if (target == 0) {
-            ans.add(new ArrayList<>(path));
-        }
-
-        for (int i = start; i < candidates.length; i++) {
-            
-            if (candidates[i] > target) {
-                break;
+    private void solve(int index, int[] candidates, int target, int sum, List<Integer> path, List<List<Integer>> ans) {
+        // Base case: processed all elements
+        if (index == candidates.length) {
+            if (sum == target) {
+                ans.add(new ArrayList<>(path));
             }
-            path.add(candidates[i]);
-             
-            solve(i,target - candidates[i] ,candidates, path ,ans);
-            
-            path.remove(path.size() - 1);
-
+            return;
         }
 
+        // 1. TAKE: stay at 'index' so candidates[index] can be picked again
+        if (sum + candidates[index] <= target) {
+            path.add(candidates[index]);
+            solve(index, candidates, target, sum + candidates[index], path, ans);
+            path.remove(path.size() - 1); // Backtrack
+        }
+
+        // 2. NOT-TAKE: move to 'index + 1' to never pick candidates[index] again
+        solve(index + 1, candidates, target, sum, path, ans);
     }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        Arrays.sort(candidates);
         List<List<Integer>> ans = new ArrayList<>();
-        solve(0,target,candidates, new ArrayList<>(), ans);
+        List<Integer> path = new ArrayList<>();
+        solve(0, candidates, target, 0, path, ans);
         return ans;
     }
 }
