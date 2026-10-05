@@ -3,6 +3,7 @@ class Solution {
     public void solve(int start, String s, List<String> path, List<List<String>> ans){
         if(start == s.length()){
             ans.add(new ArrayList<>(path));
+            return;
         }
 
         for(int end= start; end < s.length(); end++){
