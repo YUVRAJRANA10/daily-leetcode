@@ -1,17 +1,33 @@
 class Solution {
     public int rob(int[] nums) {
-        int dp[] = new int[nums.length];
-        dp[0] = nums[0];
-        for (int i = 1; i < nums.length; i++) {
+        //tabulattion bottom top
+        // int dp[] = new int[nums.length];
+        // dp[0] = nums[0];
+        // for (int i = 1; i < nums.length; i++) {
+        //     int take = nums[i];
+        //     if (i > 1) {
+        //         take = nums[i] + dp[i - 2];
+        //     }
+        //     int nottake = 0 + dp[i - 1];
+        //     dp[i] = Math.max(take, nottake);
+        // }
+        // return dp[nums.length - 1];
+          if(nums.length == 1)return nums[0];
+           int prev1 = nums[0];
+           int prev2 = 0;
+           int curr = 0;
+           for(int i =1 ; i<nums.length;i++){
             int take = nums[i];
-            if (i > 1) {
-                take = nums[i] + dp[i - 2];
-            }
-            int nottake = 0 + dp[i - 1];
-            dp[i] = Math.max(take, nottake);
-        }
-        return dp[nums.length - 1];
+            if(i>1)take = nums[i] + prev2;
+            int nottake = 0 + prev1;
 
+            curr = Math.max(take,nottake);
+            prev2 = prev1;
+            prev1 = curr;
+           }
+
+           return curr;
+         //to down recursion + memo
         // Arrays.fill(dp, -1);
         // return helper(nums.length - 1, nums, dp);
     }
