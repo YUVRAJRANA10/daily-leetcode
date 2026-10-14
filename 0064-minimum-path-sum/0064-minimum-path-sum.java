@@ -2,15 +2,15 @@ class Solution {
     int rec(int m, int n, int[][] grid, int[][] dp) {
 
         if (m < 0 || n < 0)
-            return Integer.MAX_VALUE;
+            return (int) 1e9;
         if (m == 0 && n == 0)
             return grid[0][0];
         if (dp[m][n] != -1)
             return dp[m][n];
 
-        int left = rec(m, n - 1, grid, dp);
-        int up =  rec(m - 1, n, grid, dp);
-        dp[m][n] = grid[m][n] + Math.min(left, up);
+        int left = grid[m][n] + rec(m, n - 1, grid, dp);
+        int up = grid[m][n] + rec(m - 1, n, grid, dp);
+        dp[m][n] = Math.min(left, up);
         return dp[m][n];
     }
 
