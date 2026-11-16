@@ -1,23 +1,36 @@
+import java.util.Arrays;
+
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        int[] dp = new int[amount + 1];
+        int[] memo = new int[amount + 1];
+        Arrays.fill(memo, -2); // -2 means unvisited
         
-        // Initialize dp array with an amount larger than any possible valid answer
-        Arrays.fill(dp, amount + 1);
+        int ans = solve(coins, amount, memo);
+        return ans >= 1e9 ? -1 : ans;
+    }
+    
+    private int solve(int[] coins, int target, int[] memo) {
+        // Base Cases
+        if (target == 0) return 0;
+        if (target < 0) return (int) 1e9; // Impossible state
         
-        // Base case: 0 coins needed to make amount 0
-        dp[0] = 0;
+        // Return cached result if already calculated
+        if (memo[target] != -2) return memo[target];
         
-        // Build up the solution from 1 to amount
-        for (int i = 1; i <= amount; i++) {
-            for (int c : coins) {
-                if (i - c >= 0) {
-                    dp[i] = Math.min(dp[i], 1 + dp[i - c]);
-                }
+        int minCoins = (int) 1e9;
+        
+        // Try every coin choice for the current target
+        for (int coin : coins) {
+            int result = solve(coins, target - coin, memo);
+            if (result != 1e9) {
+                minCoins = Math.min(minCoins, 1 + result);
             }
         }
         
-        // If dp[amount] is still amount + 1, it means it's impossible to make that amount
-        return dp[amount] > amount ? -1 : dp[amount];
+        return memo[target] = minCoins;
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
