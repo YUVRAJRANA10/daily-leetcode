@@ -4,13 +4,14 @@ class Solution {
             return false;
         }
         
-        // If it's a leaf node, check if the remaining target equals its value
         if (root.left == null && root.right == null) {
             return targetSum == root.val;
         }
         
-        // Recurse down both subtrees with the reduced target sum
         int remainingSum = targetSum - root.val;
-        return hasPathSum(root.left, remainingSum) || hasPathSum(root.right, remainingSum);
+        boolean left = hasPathSum(root.left, remainingSum);
+        boolean right = hasPathSum(root.right, remainingSum);
+        
+        return left || right;
     }
 }
