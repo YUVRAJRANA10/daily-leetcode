@@ -15,24 +15,26 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        
-        if(root == null)return;
+        TreeNode curr = root;
 
-        flatten(root.left);
-        flatten(root.right);
+        while (curr != null) {
+            if (curr.left != null) {
+                // Find the rightmost node in the left subtree
+                TreeNode prev = curr.left;
+                while (prev.right != null) {
+                    prev = prev.right;
+                }
 
-        TreeNode leftsubtree = root.left;
-        TreeNode rightsubtree = root.right;
+                // Connect the original right subtree to the end of the left subtree
+                prev.right = curr.right;
 
-        if(leftsubtree!=null){
-            root.left = null;
-            root.right = leftsubtree;
-
-            TreeNode curr = leftsubtree;
-            while(curr.right!=null){
-                curr = curr.right;
+                // Move left subtree to the right and clear left pointer
+                curr.right = curr.left;
+                curr.left = null;
             }
-            curr.right = rightsubtree;
+
+            // Move to the next node in the flattened list
+            curr = curr.right;
         }
     }
 }
